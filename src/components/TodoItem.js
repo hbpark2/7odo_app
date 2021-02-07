@@ -28,6 +28,13 @@ const TodoItemBlock = styled.div`
   }
 `
 
+const CheckWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+`
+
 const CheckCircle = styled.div`
   width: 32px;
   height: 32px;
@@ -50,11 +57,11 @@ const CheckCircle = styled.div`
 const Text = styled.div`
   flex: 1;
   font-size: 21px;
-  color: #495057;
+  color: #e6ebe0;
   ${props =>
     props.done &&
     css`
-      color: #ced4da;
+      color: #bbb;
     `}
 `
 
@@ -64,10 +71,10 @@ function TodoItem({id, done, text}) {
   const onRemove = () => dispatch({type: 'REMOVE', id})
   return (
     <TodoItemBlock>
-      <CheckCircle done={done} onClick={onToggle}>
-        {done && <MdDone />}
-      </CheckCircle>
-      <Text done={done}>{text}</Text>
+      <CheckWrap onClick={onToggle}>
+        <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
+        <Text done={done}>{text}</Text>
+      </CheckWrap>
       <Remove onClick={onRemove}>
         <MdDelete />
       </Remove>

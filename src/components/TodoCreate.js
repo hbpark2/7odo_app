@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled, {css} from 'styled-components'
 import {MdAdd} from 'react-icons/md'
 import {useTodoDispatch, useTodoNextId} from '../TodoContext'
@@ -32,7 +32,7 @@ const CircleButton = styled.button`
   ${props =>
     props.open &&
     css`
-      background: #ff6b6b;
+      background: #3ab795;
       &:hover {
         background: #ff8787;
       }
@@ -91,10 +91,17 @@ function TodoCreate() {
         done: false,
       },
     })
+
+    localStorage.setItem('list', value)
     setValue('')
     setOpen(false)
     nextId.current += 1
   }
+
+  useEffect(() => {
+    const list = localStorage.getItem('list')
+    console.log(list)
+  }, [])
 
   return (
     <>
